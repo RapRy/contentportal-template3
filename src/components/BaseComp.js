@@ -1,8 +1,21 @@
-const BaseComp = (props) => {
+import { useEffect } from 'react'
+import _ from 'lodash'
+
+import { Container } from '@material-ui/core'
+import Header from './Header'
+
+const BaseComp = ({ data }) => {
+
+    useEffect(() => {
+        
+    }, [])
+
     return (
-        <div>
-            <h1>Hello</h1>
-        </div>
+        <Container>
+            {
+                !_.isEmpty(data) && <Header categories={data.categories} />
+            }
+        </Container>
     );
 }
 
