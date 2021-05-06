@@ -1,7 +1,9 @@
-function App() {
+import BaseComp from './components/BaseComp'
+
+const App = () => {
   return (
     <div>
-      Hello
+      <BaseComp />
     </div>
   );
 }
