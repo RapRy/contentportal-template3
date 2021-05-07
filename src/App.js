@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData } from './redux/dataReducer'
 import * as api from './api'
@@ -15,11 +15,13 @@ const App = () => {
   const fetchCats = async () => {
     const { data } = await api.fetchCategories()
 
-    dispatch(getData(data))
+    dispatch(getData({data}))
 
   }
 
   useEffect(() => {
+
+    console.log(dataState)
       try {
          fetchCats()
       } catch (error) {
@@ -31,7 +33,7 @@ const App = () => {
     <Container>
       {
         !_.isEmpty(dataState) &&
-          dataState.map((val, i) => (
+        dataState.map((val, i) => (
             <BaseComp data={val} key={i} />
           ))
       }
