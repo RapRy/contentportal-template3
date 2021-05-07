@@ -3,6 +3,6 @@ import dataReducer from './dataReducer'
 
 export default configureStore({
     reducer: {
-        counter: dataReducer
+        data: dataReducer
     }
 })

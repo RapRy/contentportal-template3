@@ -12,7 +12,7 @@ const BaseComp = ({ data }) => {
     return (
         <Container className={classes.mainBaseComp}>
             {
-                !_.isEmpty(data) && <Header categories={data.categories} />
+                !_.isEmpty(data) && <Header categories={data.categories} cardRef={data.cardRef} />
             }
             {
                 !_.isEmpty(data) && <Body subcategories={data.subcategories} />
@@ -30,8 +30,8 @@ const useStyles = makeStyles({
         height: "100vh",
         position: 'absolute',
         top:"0px",
-        left:"4%"
-
+        left:"0%",
+        padding: "0"
     }
 })
 

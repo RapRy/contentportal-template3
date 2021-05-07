@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getData } from './redux/dataReducer'
+import { getCategories } from './redux/dataReducer'
 import * as api from './api'
 
 import BaseComp from './components/BaseComp'
@@ -10,18 +10,16 @@ import _ from 'lodash'
 
 const App = () => {
   const dispatch = useDispatch();
-  const dataState = useSelector((state) => state.counter.data)
+  const dataState = useSelector((state) => state.data.data)
 
   const fetchCats = async () => {
-    const { data } = await api.fetchCategories()
+    const { data } = await api.fetchCategories("Games")
 
-    dispatch(getData({data}))
+    dispatch(getCategories(data))
 
   }
 
   useEffect(() => {
-
-    console.log(dataState)
       try {
          fetchCats()
       } catch (error) {
@@ -37,7 +35,6 @@ const App = () => {
             <BaseComp data={val} key={i} />
           ))
       }
-      <BaseComp />
     </Container>
   );
 }
