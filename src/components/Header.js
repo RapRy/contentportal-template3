@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux'
-import { getCategories } from '../redux/dataReducer'
+import { getCategories, removeContents } from '../redux/dataReducer'
 import * as api from '../api'
 
-import { Container, List, ListItem } from '@material-ui/core'
+import { Container, List, ListItem, Box, Typography, IconButton } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 
-const Header = ({ categories, cardRef }) => {
+const Header = ({ headerData, cardRef }) => {
 
     const dispatch = useDispatch()
     const classes = useStyles()
@@ -22,11 +23,23 @@ const Header = ({ categories, cardRef }) => {
                 cardRef === "category" &&
                 <List>
                     {
-                        categories !== undefined && categories.map((cat, i) => (
+                        headerData !== undefined && headerData.map((cat, i) => (
                             <ListItem className={classes.li} key={cat._id} onClick={() => handleClick(cat.catName)}>{cat.catName}</ListItem>
                         ))
                     }
                 </List>
+            }
+
+            {
+                cardRef === "contents" &&
+                    <Box component="div" className={classes.containerCont}>
+                        <Typography variant="h4" className={classes.h4}>
+                            {headerData}
+                        </Typography>
+                        <IconButton className={classes.button} onClick={() => dispatch(removeContents())} >
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
             }
         </Container>
     )
@@ -38,12 +51,26 @@ const useStyles = makeStyles({
         background: "linear-gradient(180deg, #9DA1B2 0%, #747787 100%)",
         borderRadius: "8px 8px 0px 0px"
     },
-    li:{
+    li: {
         color: "#FAFAFF",
         fontSize: "1rem",
         fontWeight: "500",
         display: "inline"
 
+    },
+    containerCont: {
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        gap: "10px",
+        alignItems: "center"
+    },
+    h4: {
+        fontSize: "1rem",
+        fontWeight: "500",
+        color: "#FAFAFF"
+    },
+    button: {
+        padding: "0"
     }
 })
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { getContents } from '../redux/dataReducer'
 import * as api from '../api'
 
-const Body = ({ subcategories, cardRef }) => {
+const Body = ({ bodyData, cardRef }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
@@ -21,11 +21,25 @@ const Body = ({ subcategories, cardRef }) => {
                     <List>
                         {
                             
-                            subcategories !== undefined && subcategories.map((sub, i) => (
+                            bodyData !== undefined && bodyData.map((sub, i) => (
                                 <ListItem onClick={() => handleClick(sub.subCatName)} className={classes.li} key={sub._id}>{sub.subCatName}</ListItem>
                             ))
                         }
                     </List>
+            }
+
+            {
+                cardRef === "contents" &&
+                    <Box component="div" className={classes.containerCont}>
+                        {
+                            bodyData !== undefined && bodyData.map((cont, i) => (
+                                <Box key={cont._id}>
+                                    <img src={cont.thumbnail} alt={cont.name} />
+                                    <p>{cont.name}</p>
+                                </Box>
+                            ))
+                        }
+                    </Box>
             }
         </Box>
     )
@@ -49,6 +63,11 @@ const useStyles = makeStyles({
         fontSize: "1.1rem",
         textShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
         padding: "15px 0"
+    },
+    containerCont: {
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "10px"
     }
 })
 

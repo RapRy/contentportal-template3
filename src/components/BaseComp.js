@@ -12,10 +12,10 @@ const BaseComp = ({ data }) => {
     return (
         <Container className={classes.mainBaseComp}>
             {
-                !_.isEmpty(data) && <Header categories={data.categories} cardRef={data.cardRef} />
+                !_.isEmpty(data) && <Header headerData={data.header} cardRef={data.cardRef} />
             }
             {
-                !_.isEmpty(data) && <Body subcategories={data.subcategories} cardRef={data.cardRef} />
+                !_.isEmpty(data) && <Body bodyData={data.body} cardRef={data.cardRef} />
             }
         </Container>
     );
