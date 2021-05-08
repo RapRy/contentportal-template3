@@ -7,11 +7,11 @@ export const dataReducerSlice = createSlice({
     },
     reducers: {
         getCategories: (state, action) => {
-            const addedData = { object1: "1", cardRef: "category", 
+            const addedData = { cardRef: "category", 
                 customStyles: {
                     zindex: "1",
                     width: "100",
-                    left: "4",
+                    left: "0",
                     top: "0"
                 }
             }
@@ -19,7 +19,9 @@ export const dataReducerSlice = createSlice({
             state.data = [newData]
         },
         getContents: (state, action) => {
-            
+            state.data[0].customStyles.width = "92"
+            state.data[0].customStyles.left = "4"
+            console.log(action.payload)    
         }
     }
 })

@@ -7,7 +7,7 @@ import Header from './Header'
 import Body from './Body'
 
 const BaseComp = ({ data }) => {
-    const classes = useStyles()
+    const classes = useStyles({ zindex: data.customStyles.zindex, width: data.customStyles.width, left: data.customStyles.left, top: data.customStyles.top })
 
     return (
         <Container className={classes.mainBaseComp}>
@@ -15,7 +15,7 @@ const BaseComp = ({ data }) => {
                 !_.isEmpty(data) && <Header categories={data.categories} cardRef={data.cardRef} />
             }
             {
-                !_.isEmpty(data) && <Body subcategories={data.subcategories} />
+                !_.isEmpty(data) && <Body subcategories={data.subcategories} cardRef={data.cardRef} />
             }
         </Container>
     );
@@ -26,12 +26,13 @@ const useStyles = makeStyles({
         background: "#fafaff",
         borderRadius: "8px 8px 0 0",
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
-        width: "100%",
+        width: props => props.width+"%",
         height: "100vh",
         position: 'absolute',
-        top:"0px",
-        left:"0%",
-        padding: "0"
+        top: props => props.top+"px",
+        left: props => props.left+"%",
+        padding: "0",
+        zIndex: props => props.zindex
     }
 })
 

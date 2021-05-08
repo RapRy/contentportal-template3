@@ -1,18 +1,32 @@
 import { Box, List, ListItem } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import { useDispatch } from 'react-redux'
+import { getContents } from '../redux/dataReducer'
+import * as api from '../api'
 
-const Body = ({ subcategories }) => {
+const Body = ({ subcategories, cardRef }) => {
     const classes = useStyles()
+    const dispatch = useDispatch()
+
+    const handleClick = async (subcat) => {
+        const { data } = await api.fetchContents(subcat)
+
+        dispatch(getContents(data))
+    }
 
     return (
         <Box component="div" className={classes.mainContainer}>
-            <List>
-                {
-                    subcategories !== undefined && subcategories.map((sub, i) => (
-                        <ListItem className={classes.li} key={sub._id}>{sub.subCatName}</ListItem>
-                    ))
-                }
-            </List>
+            {
+                cardRef === "category" &&
+                    <List>
+                        {
+                            
+                            subcategories !== undefined && subcategories.map((sub, i) => (
+                                <ListItem onClick={() => handleClick(sub.subCatName)} className={classes.li} key={sub._id}>{sub.subCatName}</ListItem>
+                            ))
+                        }
+                    </List>
+            }
         </Box>
     )
 }
