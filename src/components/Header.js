@@ -6,7 +6,7 @@ import { Container, List, ListItem, Box, Typography, IconButton } from '@materia
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 
-const Header = ({ headerData, cardRef }) => {
+const Header = ({ headerData, cardRef, refId }) => {
 
     const dispatch = useDispatch()
     const classes = useStyles()
@@ -31,12 +31,12 @@ const Header = ({ headerData, cardRef }) => {
             }
 
             {
-                cardRef === "contents" &&
+                (cardRef === "contents" || cardRef === "details") &&
                     <Box component="div" className={classes.containerCont}>
                         <Typography variant="h4" className={classes.h4}>
                             {headerData}
                         </Typography>
-                        <IconButton className={classes.button} onClick={() => dispatch(removeContents())} >
+                        <IconButton className={classes.button} onClick={() => dispatch(removeContents(refId))} >
                             <CloseIcon />
                         </IconButton>
                     </Box>

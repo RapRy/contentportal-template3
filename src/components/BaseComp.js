@@ -1,18 +1,24 @@
 import _ from 'lodash'
 
+import { useEffect } from 'react'
+
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import Header from './Header'
 import Body from './Body'
 
-const BaseComp = ({ data }) => {
+const BaseComp = ({ data, refId }) => {
     const classes = useStyles({ zindex: data.customStyles.zindex, width: data.customStyles.width, left: data.customStyles.left, top: data.customStyles.top })
+
+    useEffect(() => {
+        console.log(refId)
+    }, [])
 
     return (
         <Container className={classes.mainBaseComp}>
             {
-                !_.isEmpty(data) && <Header headerData={data.header} cardRef={data.cardRef} />
+                !_.isEmpty(data) && <Header headerData={data.header} cardRef={data.cardRef} refId={refId} />
             }
             {
                 !_.isEmpty(data) && <Body bodyData={data.body} cardRef={data.cardRef} />

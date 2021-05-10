@@ -9,3 +9,7 @@ body{
     background-color:#1E2749;
     font-family: "Ubuntu", sans-serif;
 }
+
+img{
+    max-width: 100%;
+}

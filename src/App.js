@@ -8,9 +8,17 @@ import { Container } from '@material-ui/core'
 
 import _ from 'lodash'
 
+import { useTransition, animated } from 'react-spring'
+
 const App = () => {
   const dispatch = useDispatch();
   const dataState = useSelector((state) => state.data.data)
+
+  const transition = useTransition(dataState, {
+    from: { y: "999px", x: "4%", width: "92%" },
+    enter: { y: "10px", x: "0%", width: "100%" },
+    leave: { y: "999px", x: "4%", width: "92%" }
+  })
 
   const fetchCats = async () => {
     const { data } = await api.fetchCategories("Games")
@@ -29,10 +37,19 @@ const App = () => {
 
   return (
     <Container>
-      {
+      {/* {
         !_.isEmpty(dataState) &&
         dataState.map((val, i) => (
-            <BaseComp data={val} key={i} />
+            <BaseComp data={val} refId={i} key={i} />
+          ))
+      } */}
+
+      {
+        !_.isEmpty(dataState) && 
+          transition((style, item, t, i) => (
+            <animated.div style={style}>
+              <BaseComp data={item} refId={i} />
+            </animated.div>
           ))
       }
     </Container>
