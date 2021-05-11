@@ -1,7 +1,5 @@
 import _ from 'lodash'
 
-import { useEffect } from 'react'
-
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
@@ -10,10 +8,6 @@ import Body from './Body'
 
 const BaseComp = ({ data, refId }) => {
     const classes = useStyles({ zindex: data.customStyles.zindex, width: data.customStyles.width, left: data.customStyles.left, top: data.customStyles.top })
-
-    useEffect(() => {
-        console.log(refId)
-    }, [])
 
     return (
         <Container className={classes.mainBaseComp}>
