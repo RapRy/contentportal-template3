@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { Box, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
@@ -10,7 +10,10 @@ import PauseIcon from '@material-ui/icons/Pause'
 const MediaPlayer = ({ media, progress, timestamp }) => {
     const classes = useStyles()
     const [showVolume, setShowVolume] = useState(false)
+    const [volumeVal, setVolumeVal] = useState(0)
     const [play, setPlay] = useState(false)
+
+    const volumeProgress = useRef()
 
     const stopMedia = () => {
         if(play === true){
@@ -22,9 +25,15 @@ const MediaPlayer = ({ media, progress, timestamp }) => {
         }
     }
 
+    const updateVolume = () => {
+        media.current.volume = volumeProgress.current.value
+        setVolumeVal(volumeProgress.current.value)
+    }
+
     useEffect(() => {
         play ? media.current.play() : media.current.pause()
-    }, [play])
+        setVolumeVal(media.current.volume)
+    }, [play, media])
 
     return (
         <Box className={classes.controls}>
@@ -36,7 +45,7 @@ const MediaPlayer = ({ media, progress, timestamp }) => {
             </Button> 
             <input className={classes.progress} type="range" min="0" max="100" step="0.1" value={progress} readOnly />
             <Box className={classes.volumeControl}>
-                {showVolume && <input className={`${classes.progress} ${classes.volumeRange}`} type="range" min="0" max="1" step="0.01" value={0} readOnly />}
+                {showVolume && <input ref={volumeProgress} className={`${classes.progress} ${classes.volumeRange}`} type="range" min="0" max="1" step="0.01" value={volumeVal} onChange={updateVolume} />}
                 <Button className={classes.btn} onClick={() => setShowVolume(!showVolume)}>
                     <VolumeUpIcon />
                 </Button>
