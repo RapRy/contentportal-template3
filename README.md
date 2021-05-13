@@ -5,7 +5,7 @@ Demo Link: 💻 <a href="https://portal-template-3.netlify.app/">Portal Template
 Mock Up Link: 🎨<a href="https://www.figma.com/file/VaFjuGgvOdfMWBgAowB7SS/cardPopUpUI">Portal Template 3</a>
 
 Tech's used to build this demo<br>
-🔗 <a href="https://material-ui.com/">Material UI</a><br>
+🔗 <a href="https://material-ui.com/" target="_blank">Material UI</a><br>
 🔗 <a href="https://redux.js.org/">Redux</a><br>
 🔗 <a href="https://github.com/axios/axios">Axios</a><br>
 🔗 <a href="https://reactjs.org/">React</a><br>
